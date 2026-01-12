@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from schemas import IpData
 
 locations_router = APIRouter(
     prefix="/locations",
