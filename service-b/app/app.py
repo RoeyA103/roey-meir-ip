@@ -7,7 +7,7 @@ app = FastAPI()
 
 @app.get("/")
 def root():
-    return {"Message":"GET /locations return all redis storege , POST /locations send {ip:coordinates}"}
+    return {"Message":"GET /locations return all redis storege , POST /locations send {ip,coordinates}"}
 
 app.include_router(locations_router)
 
