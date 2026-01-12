@@ -1,14 +1,14 @@
 from fastapi import APIRouter
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from ipaddress import IPv4Address
-from schemas import landmark
+from schemas import process_ip
 
-class Ip(BaseModel):
-    ip: IPv4Address
-    # ip: str = Field(regex=r'^(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)){3}$')
 
 router = APIRouter(prefix="/getcond")
 
+class Ip(BaseModel):
+    ip: IPv4Address
+
 @router.post("/")
 def get_condinator(ip:Ip):
-    return landmark(ip)
+    return process_ip(str(ip.ip))
