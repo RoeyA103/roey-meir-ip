@@ -2,3 +2,4 @@ fastapi<0.100
 pydantic<2
 uvicorn[standard]
 redis
+python-dotenv
