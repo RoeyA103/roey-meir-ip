@@ -6,7 +6,7 @@ import os
 
 load_dotenv()  
 
-db_host = os.getenv("DATABASE_HOST")
+db_host = os.getenv("DATABASE_HOST","redis")
 db_port = os.getenv("DATABASE_PORT",6379)
 
 locations_router = APIRouter(
