@@ -6,15 +6,15 @@ locations_router = APIRouter(
     prefix="/locations",
     tags=["Locations Storage"])
 
-rh = RedisHandler()
+rh = RedisHandler(host="redis",port=6379)
 
-@locations_router.GET("/")
+@locations_router.get("/")
 def get_all_data():
     result = rh.fetch_all()
 
     return result if result else {"error"}
 
-locations_router.post("/")
+@locations_router.post("/")
 def insert_data(data:IpData):
     success = rh.insert(data)
     if not success:

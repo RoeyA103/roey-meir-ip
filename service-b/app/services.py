@@ -22,10 +22,10 @@ class RedisHandler(BaseStorage):
 
     def insert(self, data: IpData) -> bool:
         try:
-            r = redis.Redis(host=self.hash_name , port=self.port)
+            r = redis.Redis(host=self.host , port=self.port)
 
             ip_str = str(data.ip)
-            coord_json = json.dumps(data.coordinates.model_dump())
+            coord_json = json.dumps(data.coordinates.dict())
             
             r.hset(self.hash_name, ip_str, coord_json)
 
@@ -38,7 +38,7 @@ class RedisHandler(BaseStorage):
 
     def fetch_all(self):
         try:
-            r = redis.Redis(host=self.hash_name , port=self.port ,decode_responses=True)
+            r = redis.Redis(host=self.host , port=self.port ,decode_responses=True)
 
             raw = r.hgetall(self.hash_name)
             return [
