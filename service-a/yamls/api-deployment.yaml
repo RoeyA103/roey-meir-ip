@@ -4,7 +4,7 @@ metadata:
   name: coordinator-api
 
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: coordinator-api-1
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: coordinator-api
-        image: mma44331/meyir-royi:v1
+        image: mma44331/meyir-royi:v2
         ports:
         - containerPort: 8000
           name: http
