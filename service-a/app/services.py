@@ -30,7 +30,7 @@ def get_ip_location(ip:str)->dict:
 
 
 def send_location_to_service(ip,location: dict) -> dict:
-    url = "http://api-b-service:8080/location"
+    url = "http://redis-api-svc:8080/location"
 
     payload = {
         "ip": ip,
