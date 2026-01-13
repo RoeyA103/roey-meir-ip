@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coordinator-api
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: coordinator-api-1
+  template:
+    metadata:
+      labels:
+        app: coordinator-api-1
+        tier: application
+    spec:
+      containers:
+      - name: coordinator-api
+        image: mma44331/meyir-royi:v1
+        ports:
+        - containerPort: 8000
+          name: http
+
+
+
