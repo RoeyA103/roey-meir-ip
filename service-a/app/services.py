@@ -30,12 +30,14 @@ def get_ip_location(ip:str)->dict:
 
 
 def send_location_to_service(ip,location: dict) -> dict:
-    url = "http://localhost:8080/location"
+    url = "http://api-b-service:8080/location"
 
     payload = {
         "ip": ip,
-        "latitude": location["latitude"],
-        "longitude": location["longitude"]
+        "cordinates":{
+            "latitude": location["latitude"],
+            "longitude": location["longitude"]
+        }
     }
     response = requests.post(url,json=payload,timeout=5)
 
