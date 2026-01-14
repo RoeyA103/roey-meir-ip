@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: streamlit-api
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: streamlit-api
+  template:
+    metadata:
+      labels:
+        app: streamlit-api
+        tier: application
+    spec:
+      containers:
+      - name: streamlit-api
+        image: roeyaverbuch/service-streamlit:v1
+        ports:
+        - containerPort: 8501
+        env:
+          - name: DATABASE_API_URL
+            value: "http://redis-api-svc:8080/locations"
+
+
+
+
+
+
+
