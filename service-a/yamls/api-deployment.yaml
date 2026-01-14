@@ -7,16 +7,16 @@ spec:
   replicas: 2
   selector:
     matchLabels:
-      app: coordinator-api-1
+      app: coordinator-api
   template:
     metadata:
       labels:
-        app: coordinator-api-1
+        app: coordinator-api
         tier: application
     spec:
       containers:
       - name: coordinator-api
-        image: mma44331/meyir-royi:v2
+        image: mma44331/meyir-royi:v5
         ports:
         - containerPort: 8000
           name: http
