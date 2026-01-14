@@ -25,21 +25,30 @@ def get_ip_location(ip:str)->dict:
 
     if data.get("status") != "success":
         raise ValueError("IP location lookup failed")
-    return {"latitude": data["lat"], "longitude": data["lon"]}
+    return {"lat": data["lat"], "lon": data["lon"]}
 
 
 
 def send_location_to_service(ip,location: dict) -> dict:
-    url = "http://redis-api-svc:8080/location"
+    url = "http://redis-api-svc:8080/locations"
 
     payload = {
         "ip": ip,
-        "cordinates":{
-            "latitude": location["latitude"],
-            "longitude": location["longitude"]
+        "coordinates":{
+            "lat": location["lat"],
+            "lon": location["lon"]
         }
     }
     response = requests.post(url,json=payload,timeout=5)
+
+    response.raise_for_status()
+
+    return response.json()
+
+def get_all_coordinates():
+    url = "http://redis-api-svc:8080/locations"
+
+    response = requests.get(url,timeout=5)
 
     response.raise_for_status()
 
