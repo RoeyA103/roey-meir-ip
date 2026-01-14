@@ -5,7 +5,7 @@ metadata:
 
 spec:
   selector:
-    app: streamlit-api-svc
+    app: streamlit-api
   ports:
   - port: 8501
     targetPort: 8501

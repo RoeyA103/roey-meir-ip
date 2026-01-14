@@ -1,6 +1,7 @@
 import os
 import requests
 from dotenv import load_dotenv
+from fastapi.responses import Response
 
 load_dotenv()
 
@@ -55,7 +56,9 @@ def get_all_coordinates():
     return response.json()
 
 def coordinates_to_map():
-    url = F"{STREAMLIT_URL}"
-    response = requests.get(url, timeout=5)
+    response = requests.get(STREAMLIT_URL, timeout=5)
     response.raise_for_status()
-    return response
+    return Response(
+        content=response.text,
+        media_type="text/html"
+    )
