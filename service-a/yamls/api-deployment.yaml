@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: coordinator-api
-        image: mma44331/meyir-royi:v7
+        image: mma44331/meyir-royi:v8
         ports:
         - containerPort: 8000
           name: http
