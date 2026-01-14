@@ -204,6 +204,29 @@ Copy this URL and use it to access the API.
 - Retrieved external HTTPS URL
 
 ---
+# Update Deployment / API Image & Rollback
+
+## Update Image – Plain OpenShift Deployment
+
+### Update the Deployment to a new image from DockerHub
+oc set image deployment/<deployment-name> <container-name>=<dockerhub-username>/<image>:<tag>
+
+### Example
+oc set image deployment/coordinates-api api-container=myuser/coordinates-api:v1.2
+
+### Check rollout status
+oc rollout status deployment/coordinates-api
+
+## Rollback to a Previous Revision – Plain Deployment
+
+### List previous rollouts
+oc rollout history deployment/coordinates-api
+
+### Rollback to a specific revision (example: revision 2)
+oc rollout undo deployment/coordinates-api --to-revision=2
+
+### Verify rollback
+oc rollout status deployment/coordinates-api
 
 ## Status
 
