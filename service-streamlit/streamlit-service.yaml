@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: streamlit-api-svc
+
+spec:
+  selector:
+    app: streamlit-api-svc
+  ports:
+  - port: 8501
+    targetPort: 8501
+    protocol: TCP
+
+
