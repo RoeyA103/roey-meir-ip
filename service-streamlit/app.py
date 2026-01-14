@@ -20,13 +20,16 @@ session = Session()
 try:
     response = session.get(url, timeout=5)
     response.raise_for_status()
-    coord = response.json()['data']
+    coord = response.json()  # this is a LIST
 
     rows = []
-    for ip, v in coord.items():
-        lat, lon = float(v['lat']), float(v['lon'])
+    for item in coord:
+        ip = item["ip"]
+        lat = float(item["coordinates"]["lat"])
+        lon = float(item["coordinates"]["lon"])
+
         jitter = rng.standard_normal(2) / 50
-        
+
         rows.append({
             "lat": lat + jitter[0],
             "lon": lon + jitter[1],

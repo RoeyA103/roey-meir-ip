@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: streamlit-api
-        image: roeyaverbuch/service-streamlit:v1
+        image: roeyaverbuch/service-streamlit:v2
         ports:
         - containerPort: 8501
         env:
