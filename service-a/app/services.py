@@ -1,6 +1,8 @@
+import os
 import requests
+from dotenv import load_dotenv
 
-
+load_dotenv()
 
 def process_ip(ip: str)->dict:
     try:
@@ -18,7 +20,7 @@ def process_ip(ip: str)->dict:
 
 
 def get_ip_location(ip:str)->dict:
-    url = f"http://ip-api.com/json/{ip}"
+    url = f"{os.getenv('IP_API')}{ip}"
     response = requests.get(url, timeout=5)
     response.raise_for_status()
     data = response.json()
@@ -30,8 +32,7 @@ def get_ip_location(ip:str)->dict:
 
 
 def send_location_to_service(ip,location: dict) -> dict:
-    url = "http://redis-api-svc:8080/locations"
-
+    url = f"{os.getenv('REDIS_HOST')}/locations"
     payload = {
         "ip": ip,
         "coordinates":{
@@ -40,16 +41,17 @@ def send_location_to_service(ip,location: dict) -> dict:
         }
     }
     response = requests.post(url,json=payload,timeout=5)
-
     response.raise_for_status()
-
     return response.json()
 
 def get_all_coordinates():
-    url = "http://redis-api-svc:8080/locations"
-
+    url = f"{os.getenv('REDIS_HOST')}/locations"
     response = requests.get(url,timeout=5)
-
     response.raise_for_status()
-
     return response.json()
+
+def coordinates_to_map():
+    url = f"{os.getenv('STREAMLIT_HOST')}/locations"
+    response = requests.get(url, timeout=5)
+    response.raise_for_status()
+    return response
