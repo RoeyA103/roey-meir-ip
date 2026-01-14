@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-api
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: redis-api
+  template:
+    metadata:
+      labels:
+        app: redis-api
+        tier: application
+    spec:
+      containers:
+      - name: redis-api
+        image: roeyaverbuch/service-b:v1
+        ports:
+        - containerPort: 8080
+        env:
+          - name: DATABASE_PORT
+            value: "6379"
+          - name: DATABASE_HOST
+            value: "redis-0.redis-svc"
+
+
+
+
+
+
