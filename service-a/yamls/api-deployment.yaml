@@ -21,13 +21,9 @@ spec:
         - containerPort: 8000
           name: http
         env:
-          - name: STREAMLIT_PORT
-            value: "8501"
-          - name: STREAMLIT_HOST
-            value: "http://streamlit-api-svc"
-          - name: REDIS_HOST
-            value: "http://redis-api-svc"
-          - name: REDIS_PORT
-            value: "8080"
+          - name: STREAMLIT_URL
+            value: "http://streamlit-api-svc:8501"
+          - name: REDIS_API_URL
+            value: "http://redis-api-svc:8080/locations"
           - name: IP_API
             value: "http://ip-api.com/json/"

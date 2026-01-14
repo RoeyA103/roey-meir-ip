@@ -4,6 +4,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+STREAMLIT_URL = os.getenv("STREAMLIT_URL","http://streamlit-api-svc:8501")
+REDIS_API_URL = os.getenv("REDIS_API_URL","http://redis-api-svc:8080/locations")
+IP_API = os.getenv("IP_API","http://ip-api.com/json/")
+
 def process_ip(ip: str)->dict:
     try:
         location = get_ip_location(ip)
@@ -20,7 +24,7 @@ def process_ip(ip: str)->dict:
 
 
 def get_ip_location(ip:str)->dict:
-    url = f"{os.getenv('IP_API')}{ip}"
+    url = f"{IP_API}/{ip}"
     response = requests.get(url, timeout=5)
     response.raise_for_status()
     data = response.json()
@@ -32,7 +36,7 @@ def get_ip_location(ip:str)->dict:
 
 
 def send_location_to_service(ip,location: dict) -> dict:
-    url = f"{os.getenv('REDIS_HOST')}/locations"
+    url = f"{REDIS_API_URL}"
     payload = {
         "ip": ip,
         "coordinates":{
@@ -45,13 +49,13 @@ def send_location_to_service(ip,location: dict) -> dict:
     return response.json()
 
 def get_all_coordinates():
-    url = f"{os.getenv('REDIS_HOST')}/locations"
+    url = f"{REDIS_API_URL}"
     response = requests.get(url,timeout=5)
     response.raise_for_status()
     return response.json()
 
 def coordinates_to_map():
-    url = f"{os.getenv('STREAMLIT_HOST')}/locations"
+    url = F"{STREAMLIT_URL}"
     response = requests.get(url, timeout=5)
     response.raise_for_status()
     return response
