@@ -8,7 +8,7 @@ app.include_router(router)
 
 @app.get("/")
 def root():
-    return "Message: To send IP, run a POST request to '/getcord', to get all coordinates, run a GET request '/getcord' to list all saved ip:coordinates"
+    return "Message: To send IP, run a POST request to '/getcond', to get all coordinates, run a GET request '/getcond' to list all saved ip:coordinates"
 
 
 
